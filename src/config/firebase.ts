@@ -1,13 +1,12 @@
 import admin from "firebase-admin";
 import * as dotenv from "dotenv";
-import path from "path";
 
 dotenv.config();
 
-const serviceAccountPath = path.resolve(__dirname, "../../secrets/" + process.env.FIREBASE_SERVICE_ACCOUNT);
+const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_CONTENT!);
 
 admin.initializeApp({
-  credential: admin.credential.cert(require(serviceAccountPath)),
+  credential: admin.credential.cert(serviceAccount),
   databaseURL: process.env.FIREBASE_DB_URL,
 });
 
