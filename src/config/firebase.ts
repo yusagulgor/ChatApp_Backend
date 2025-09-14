@@ -3,6 +3,10 @@ import * as dotenv from "dotenv";
 
 dotenv.config();
 
+if (!process.env.FIREBASE_SERVICE_ACCOUNT_CONTENT) {
+    throw new Error("FIREBASE_SERVICE_ACCOUNT_CONTENT is not defined");
+}
+
 const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_CONTENT!);
 
 admin.initializeApp({
